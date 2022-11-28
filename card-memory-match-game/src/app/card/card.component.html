@@ -1,0 +1,15 @@
+<div class="card">
+  <div class="card__info">
+    <span class="time">Time: </span>
+  </div>
+  <div class="card__board">
+    <div *ngFor="let card of cards" class="simple-card" [@flipState]="card.state" (click)="toggleFlip(card)">
+      <div class="side front">
+
+      </div>
+      <div class="side back">
+        {{ card.icon }}
+      </div>
+    </div>
+  </div>
+</div>

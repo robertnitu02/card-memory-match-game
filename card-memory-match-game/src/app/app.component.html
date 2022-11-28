@@ -1,6 +1,7 @@
 <div class="app">
   <div *ngIf="!gameStarted" class="app__main-menu">
     <span class="title">🧠 Card Memory Match Game 🧠</span>
-    <span class="start-game">Start Game</span>
+    <span class="start-game" (click)="gameStarted = true">Start Game</span>
   </div>
+  <app-card *ngIf="gameStarted"></app-card>
 </div>

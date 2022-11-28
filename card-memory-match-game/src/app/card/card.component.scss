@@ -1,0 +1,66 @@
+@use '/src/shared/colors' as colors;
+
+.card {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  place-items: center;
+  flex-direction: column;
+  gap: 10px;
+
+  &__info {
+
+    .time {
+      color: colors.$mercury;
+      font-size: 15px;
+    }
+  }
+
+  &__board {
+    display: grid;
+    width: 600px;
+    height: 500px;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    grid-row-gap: 2px;
+    grid-column-gap: 2px;
+    border: 2px solid black;
+
+    .simple-card {
+      display: flex;
+      justify-content: center;
+      place-items: center;
+      font-size: 40px;
+      background: red;
+
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      -ms-transform: transform 1s;
+      transform: transform 1s;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .side {
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .front {
+      -ms-transform: rotateY(0deg);
+      transform: rotateY(0deg);
+    }
+
+    .back {
+      -ms-transform: rotateY(-180deg);
+      transform: rotateY(-180deg);
+    }
+  }
+}
