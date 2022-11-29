@@ -18,7 +18,7 @@
     }
   }
 
-  &__board {
+  &__board-0 {
     display: grid;
     width: 600px;
     height: 500px;
@@ -26,43 +26,63 @@
     grid-template-columns: repeat(4, 1fr);
     grid-row-gap: 2px;
     grid-column-gap: 2px;
+  }
 
-    .simple-card {
-      display: flex;
-      justify-content: center;
-      place-items: center;
-      font-size: 40px;
-      background: colors.$greenWhite;
-      border: 1px solid colors.$black;
-      @include mat.elevation(2);
+  &__board-1 {
+    display: grid;
+    width: 700px;
+    height: 600px;
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+    grid-row-gap: 2px;
+    grid-column-gap: 2px;
+  }
 
-      -webkit-transform-style: preserve-3d;
-      transform-style: preserve-3d;
-      -ms-transform: transform 1s;
-      transform: transform 1s;
+  &__board-2 {
+    display: grid;
+    width: 800px;
+    height: 700px;
+    grid-template-rows: repeat(8, 1fr);
+    grid-template-columns: repeat(8, 1fr);
+    grid-row-gap: 2px;
+    grid-column-gap: 2px;
+  }
 
-      &:hover {
-        cursor: pointer;
-      }
+  .simple-card {
+    display: flex;
+    justify-content: center;
+    place-items: center;
+    font-size: 40px;
+    background: colors.$greenWhite;
+    border: 1px solid colors.$black;
+    @include mat.elevation(2);
+
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -ms-transform: transform 1s;
+    transform: transform 1s;
+
+    &:hover {
+      cursor: pointer;
     }
+  }
 
-    .side {
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
+  .side {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
 
-    .front {
-      -ms-transform: rotateY(0deg);
-      transform: rotateY(0deg);
-    }
+  .front {
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+  }
 
-    .back {
-      -ms-transform: rotateY(-180deg);
-      transform: rotateY(-180deg);
-    }
+  .back {
+    -ms-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
   }
 }

@@ -1,7 +1,10 @@
 <div class="app">
   <div *ngIf="!gameStarted" class="app__main-menu">
-    <span class="title">🧠 Card Memory Match Game 🧠</span>
-    <span class="start-game" (click)="gameStarted = true">Start Game</span>
+    <span class="title">{{ pageTitle }}</span>
+    <span *ngIf="!showDifficulty" class="start-game" (click)="choseDifficulty()">Start Game</span>
+    <span *ngIf="showDifficulty" class="start-game" (click)="startGame(Difficulty.EASY)">Easy</span>
+    <span *ngIf="showDifficulty" class="start-game" (click)="startGame(Difficulty.MEDIUM)">Medium</span>
+    <span *ngIf="showDifficulty" class="start-game" (click)="startGame(Difficulty.HARD)">Hard</span>
   </div>
-  <app-card *ngIf="gameStarted"></app-card>
+  <app-card *ngIf="gameStarted" [Difficulty]="difficultyChosen"></app-card>
 </div>

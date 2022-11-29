@@ -2,14 +2,10 @@
   <div class="card__info">
     <span class="time">{{ infoString }}</span>
   </div>
-  <div class="card__board">
+  <div class="card__board-{{Difficulty}}">
     <div *ngFor="let card of cards" class="simple-card" [@flipState]="card.state" (click)="toggleFlip(card)">
-      <div class="side front">
-
-      </div>
-      <div class="side back">
-        {{ card.icon }}
-      </div>
+      <div class="side front"></div>
+      <div class="side back">{{ card.icon }}</div>
     </div>
   </div>
 </div>

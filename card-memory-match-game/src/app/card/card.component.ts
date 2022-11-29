@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CardModel } from '../../shared/Models/card.model';
+import {
+  Icons,
+  TableDimensionByDifficulty,
+} from '../../shared/Models/game.const';
+
 import {
   animate,
   state,
@@ -32,7 +37,12 @@ import {
   ],
 })
 export class CardComponent implements OnInit {
+  @Input() Difficulty;
+
   cards: CardModel[] = [];
+  tableDifficulty;
+
+  iconsGenerated: string[] = [];
 
   infoString;
   infoTimerMinutes = 0;
@@ -47,92 +57,11 @@ export class CardComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.generateCards();
+    this.initGame();
   }
 
-  generateCards(): void {
-    this.cards = [
-      {
-        icon: '👻',
-        state: 'inactive',
-        completed: false,
-      },
-      {
-        icon: '🧶',
-        state: 'inactive',
-        completed: false,
-      },
-      {
-        icon: '🦷',
-        state: 'inactive',
-        completed: false,
-      },
-      {
-        icon: '🤳🏻',
-        state: 'inactive',
-        completed: false,
-      },
-      {
-        icon: '🥃',
-        state: 'inactive',
-        completed: false,
-      },
-      {
-        icon: '🗺',
-        state: 'inactive',
-        completed: false,
-      },
-      {
-        icon: 'a',
-        state: 'inactive',
-        completed: false,
-      },
-      {
-        icon: 'b',
-        state: 'inactive',
-        completed: false,
-      },
-      {
-        icon: '👻',
-        state: 'inactive',
-        completed: false,
-      },
-      {
-        icon: '🧶',
-        state: 'inactive',
-        completed: false,
-      },
-      {
-        icon: '🦷',
-        state: 'inactive',
-        completed: false,
-      },
-      {
-        icon: '🤳🏻',
-        state: 'inactive',
-        completed: false,
-      },
-      {
-        icon: '🥃',
-        state: 'inactive',
-        completed: false,
-      },
-      {
-        icon: '🗺',
-        state: 'inactive',
-        completed: false,
-      },
-      {
-        icon: 'a',
-        state: 'inactive',
-        completed: false,
-      },
-      {
-        icon: 'b',
-        state: 'inactive',
-        completed: false,
-      },
-    ];
+  initGame(): void {
+    this.generateCards();
     this.infoString = 'The game will start in.. 3 seconds';
     this.timerValue = 3;
     this.showCards();
@@ -157,6 +86,10 @@ export class CardComponent implements OnInit {
       selectedCard.state = 'active';
     } else {
       if (selectedCard.icon === this.cardSelected.icon) {
+        this.blockClick = true;
+        setTimeout(() => {
+          this.blockClick = false;
+        }, 250);
         selectedCard.completed = true;
         this.cardSelected.completed = true;
         selectedCard.state = 'active';
@@ -219,5 +152,43 @@ export class CardComponent implements OnInit {
       if (card.completed === false) status = false;
     });
     return status;
+  }
+
+  generateCards(): void {
+    this.tableDifficulty = TableDimensionByDifficulty[this.Difficulty];
+    let generatedValue = this.tableDifficulty * this.tableDifficulty;
+    let iconsNeeded = generatedValue / 2;
+    while (this.iconsGenerated.length < iconsNeeded) {
+      let value = Icons[Math.floor(Math.random() * Icons.length)];
+      if (!this.iconsGenerated.find((icon) => icon === value)) {
+        this.iconsGenerated.push(value);
+      }
+    }
+    let copyOfIconsGenerated = [...this.iconsGenerated];
+    copyOfIconsGenerated.forEach((iconCopy) => {
+      this.iconsGenerated.push(iconCopy);
+    });
+    // console.log(JSON.stringify(this.iconsGenerated));
+    this.iconsGenerated.forEach((icon) => {
+      this.cards.push({
+        icon: icon,
+        state: 'inactive',
+        completed: false,
+      });
+    });
+    this.shuffle();
+  }
+
+  shuffle(): void {
+    let currentIndex = this.cards.length;
+    while (currentIndex != 0) {
+      let randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+      [this.cards[currentIndex], this.cards[randomIndex]] = [
+        this.cards[randomIndex],
+        this.cards[currentIndex],
+      ];
+    }
+    // console.log(JSON.stringify(this.cards));
   }
 }
