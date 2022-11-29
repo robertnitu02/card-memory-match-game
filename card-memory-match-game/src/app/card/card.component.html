@@ -8,4 +8,7 @@
       <div class="side back">{{ card.icon }}</div>
     </div>
   </div>
+  <div *ngIf="gameFinished" class="card__control">
+    <span class="button" (click)="goBack()">Go Back</span>
+  </div>
 </div>

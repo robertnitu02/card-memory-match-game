@@ -85,4 +85,18 @@
     -ms-transform: rotateY(-180deg);
     transform: rotateY(-180deg);
   }
+
+  &__control {
+    .button {
+      color: colors.$mercury;
+      font-size: 15px;
+      font-weight: 600;
+      text-transform: uppercase;
+
+      &:hover {
+        color: colors.$white;
+        cursor: pointer;
+      }
+    }
+  }
 }

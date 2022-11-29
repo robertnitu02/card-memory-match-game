@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CardModel } from '../../shared/Models/card.model';
+import { Difficulty } from '../../shared/Models/table.enum';
 import {
   Icons,
   TableDimensionByDifficulty,
@@ -52,6 +53,7 @@ export class CardComponent implements OnInit {
   timerValue;
 
   blockClick = true;
+  gameFinished = false;
   cardSelected: CardModel = null;
 
   constructor() {}
@@ -62,8 +64,8 @@ export class CardComponent implements OnInit {
 
   initGame(): void {
     this.generateCards();
-    this.infoString = 'The game will start in.. 3 seconds';
-    this.timerValue = 3;
+    this.timerValue = this.Difficulty === Difficulty.HARD ? 4 : 3;
+    this.infoString = `The game will start in.. ${this.timerValue} seconds`;
     this.showCards();
     this.timer = setInterval(() => {
       this.timerValue--;
@@ -96,7 +98,7 @@ export class CardComponent implements OnInit {
         this.cardSelected.state = 'active';
         this.cardSelected = null;
         if (this.checkGameStatus()) {
-          // TODO win
+          this.gameWin();
         }
       } else {
         this.blockClick = true;
@@ -134,24 +136,20 @@ export class CardComponent implements OnInit {
     }, 1000);
   }
 
-  showCards(): void {
-    this.cards.forEach((card) => {
-      card.state = 'active';
-    });
-  }
-
-  hideCards(): void {
-    this.cards.forEach((card) => {
-      card.state = 'inactive';
-    });
+  gameWin() {
+    this.blockClick = true;
+    setTimeout(() => {
+      this.gameFinished = true;
+      this.infoString = `🎆 Congratulations! You finished the game in ${
+        this.infoTimerMinutes > 0 ? `${this.infoTimerMinutes} minutes and` : ''
+      } ${this.infoTimerSeconds} seconds! 🎆`;
+    }, 250);
+    clearInterval(this.timer);
+    this.timer = undefined;
   }
 
   checkGameStatus(): boolean {
-    let status = true;
-    this.cards.forEach((card) => {
-      if (card.completed === false) status = false;
-    });
-    return status;
+    return this.cards.find((card) => card.completed === false) === undefined;
   }
 
   generateCards(): void {
@@ -179,6 +177,18 @@ export class CardComponent implements OnInit {
     this.shuffle();
   }
 
+  showCards(): void {
+    this.cards.forEach((card) => {
+      card.state = 'active';
+    });
+  }
+
+  hideCards(): void {
+    this.cards.forEach((card) => {
+      card.state = 'inactive';
+    });
+  }
+
   shuffle(): void {
     let currentIndex = this.cards.length;
     while (currentIndex != 0) {
@@ -190,5 +200,9 @@ export class CardComponent implements OnInit {
       ];
     }
     // console.log(JSON.stringify(this.cards));
+  }
+
+  goBack(): void {
+    window.location.reload();
   }
 }

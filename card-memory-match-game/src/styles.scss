@@ -12,7 +12,7 @@ body, html {
 
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background: linear-gradient(-45deg, colors.$burntSienna, colors.$cerise, colors.$curiousBlue, colors.$java);
+  background: linear-gradient(-45deg, colors.$solidBlack, colors.$havelockBlue, colors.$kimberly, colors.$mulledWine);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
 }
@@ -29,5 +29,11 @@ body {
   }
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
