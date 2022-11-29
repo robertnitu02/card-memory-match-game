@@ -1,3 +1,4 @@
+@use '@angular/material' as mat;
 @use '/src/shared/colors' as colors;
 
 .card {
@@ -25,7 +26,6 @@
     grid-template-columns: repeat(4, 1fr);
     grid-row-gap: 2px;
     grid-column-gap: 2px;
-    border: 2px solid black;
 
     .simple-card {
       display: flex;
@@ -33,6 +33,8 @@
       place-items: center;
       font-size: 40px;
       background: red;
+      border: 1px solid colors.$black;
+      @include mat.elevation(2);
 
       -webkit-transform-style: preserve-3d;
       transform-style: preserve-3d;
