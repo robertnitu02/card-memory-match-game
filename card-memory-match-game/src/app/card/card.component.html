@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card__info">
-    <span class="time">Time: </span>
+    <span class="time">{{ infoString }}</span>
   </div>
   <div class="card__board">
     <div *ngFor="let card of cards" class="simple-card" [@flipState]="card.state" (click)="toggleFlip(card)">
