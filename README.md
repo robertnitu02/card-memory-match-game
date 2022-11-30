@@ -8,7 +8,7 @@ ___
 
 ## Preview
 
-### [Click here to play](https://robertnitu02.github.io/card-memory-match-game/game/)
+### [Click here to play](https://robertnitu02.github.io/card-memory-match-game/dist/card-memory-match-game/)
 ![MainPage](https://i.imgur.com/ARzfe0J.png)
 
 ___
