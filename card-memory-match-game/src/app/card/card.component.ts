@@ -69,7 +69,10 @@ export class CardComponent implements OnInit {
     this.showCards();
     this.timer = setInterval(() => {
       this.timerValue--;
-      this.infoString = `The game will start in.. ${this.timerValue} seconds`;
+      let secondsString = `${this.timerValue} second${
+        this.timerValue > 1 ? 's' : ''
+      }`;
+      this.infoString = `The game will start in.. ${secondsString}`;
       if (this.timerValue === 0) {
         this.blockClick = false;
         clearInterval(this.timer);

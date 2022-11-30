@@ -1,10 +1,15 @@
 <div class="app">
   <div *ngIf="!gameStarted" class="app__main-menu">
     <span class="title">{{ pageTitle }}</span>
-    <span *ngIf="!showDifficulty" class="start-game" (click)="choseDifficulty()">Start Game</span>
+    <span *ngIf="!showDifficulty" class="start-game" (click)="choseDifficulty()">Play</span>
     <span *ngIf="showDifficulty" class="start-game" (click)="startGame(Difficulty.EASY)">Easy</span>
     <span *ngIf="showDifficulty" class="start-game" (click)="startGame(Difficulty.MEDIUM)">Medium</span>
     <span *ngIf="showDifficulty" class="start-game" (click)="startGame(Difficulty.HARD)">Hard</span>
   </div>
   <app-card *ngIf="gameStarted" [Difficulty]="difficultyChosen"></app-card>
+  <div class="app__footer">
+    <span class="text">
+      <a href="https://github.com/robertnitu02" target="_blank">GitHub</a>
+    </span>
+  </div>
 </div>
