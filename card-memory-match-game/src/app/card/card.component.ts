@@ -85,6 +85,8 @@ export class CardComponent implements OnInit {
 
   toggleFlip(selectedCard: CardModel) {
     if (this.blockClick || selectedCard.completed) return;
+    if (this.cardSelected !== null && selectedCard === this.cardSelected)
+      return;
     selectedCard.state = 'active';
     if (this.cardSelected === null) {
       this.cardSelected = selectedCard;
@@ -101,7 +103,7 @@ export class CardComponent implements OnInit {
         this.cardSelected.state = 'active';
         this.cardSelected = null;
         if (this.checkGameStatus()) {
-          this.gameWin();
+          this.gameWon();
         }
       } else {
         this.blockClick = true;
@@ -139,7 +141,7 @@ export class CardComponent implements OnInit {
     }, 1000);
   }
 
-  gameWin() {
+  gameWon() {
     this.blockClick = true;
     setTimeout(() => {
       this.gameFinished = true;
